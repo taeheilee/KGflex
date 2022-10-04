@@ -1,0 +1,61 @@
+<div class="row">
+    <tbody>
+        {% for board in object_list %}
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="product__item">
+                <div class="product__item__pic set-bg" data-setbg="{{ board.photo.url }}">
+                </div>
+                <div class="product__item__text">
+                    <ul>
+                        <li>{{ board.content }}</li>
+                    </ul>
+                    <h5><a href="{{ board.get_absolute_url }}">{{ board.title }}</a></h5>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </tbody>
+      
+</div>
+</div>
+
+
+
+
+
+
+{% if page_obj.paginator.count >= page_obj.paginator.per_page %}
+<!-- pagination 영역 -->
+<ul class="pagination justify-content-center">
+  {% if page_obj.has_previous %}
+  <li class="page-item">
+    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">이전</a>
+  </li>
+  {% else %}
+  <li class="page-item disalbed"><a class="page-link" href="#">이전</a></li>
+  {% endif %}
+  
+  {% for page_number in page_obj.paginator.page_range %}
+  {% if page_number >= page_obj.number|add:-3 and page_number <= page_obj.number|add:3 %}
+    {% if page_number == page_obj.number %}
+      <li class="page-item active">
+        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+      </li>
+    {% else %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+      </li>
+    {% endif %}
+  {% endif %}
+  {% endfor %}                    
+  {% if page_obj.has_next %}
+  <li class="page-item">
+    <a class="page-link " href="?page={{ page_obj.next_page_number }}">다음</a>
+  </li>
+  {% else %}
+  <li class="page-item disalbed"><a class="page-link" href="#">다음</a></li>
+  {% endif %}
+</ul>
+{% endif %}                    
+
+</div>
