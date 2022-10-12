@@ -80,13 +80,21 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.mysql',
-        'HOST':  'kgdb-instance-1.cszrvyuitkgm.ap-northeast-2.rds.amazonaws.com',
-        'NAME': 'MYdatabase',
-        'USER': 'DBadmin',
+        'HOST':  'mydb-instance-1.c7tpfyaiw1nc.ap-northeast-2.rds.amazonaws.com',
+        'NAME': 'django_db',
+        'USER': 'admin',
         'PASSWORD': 'admin123',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'},
-    }
+    },
+    'readonly': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST':  'mydb-instance-1-ap-northeast-2a.c7tpfyaiw1nc.ap-northeast-2.rds.amazonaws.com',
+        'NAME': 'django_db',
+        'USER': 'admin',
+        'PASSWORD': 'admin123',
+        'PORT': '3306',
+        'OPTIONS': {'charset': 'utf8mb4'},
 }
 # Elasticache
 CACHES = {
