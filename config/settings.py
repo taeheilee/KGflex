@@ -77,33 +77,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST':  'mydb-instance-1.c7tpfyaiw1nc.ap-northeast-2.rds.amazonaws.com',
-        'NAME': 'django_db',
-        'USER': 'admin',
-        'PASSWORD': 'admin123',
-        'PORT': '3306',
-        'OPTIONS': {'charset': 'utf8mb4'},
-    },
-    'readonly': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST':  'mydb-instance-1-ap-northeast-2a.c7tpfyaiw1nc.ap-northeast-2.rds.amazonaws.com',
-        'NAME': 'django_db',
-        'USER': 'admin',
-        'PASSWORD': 'admin123',
-        'PORT': '3306',
-        'OPTIONS': {'charset': 'utf8mb4'},
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
 }
-# Elasticache
-CACHES = {
-           'default': {
-               'BACKEND': 'redis_cache.RedisCache',
-               'LOCATION': 'kgredis-1-001.wq5u0v.ng.0001.apn2.cache.amazonaws.com:6379',
-   }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
