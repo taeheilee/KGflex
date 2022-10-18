@@ -14,6 +14,9 @@ Django==3.1
 django-cacheops==6.1
 django-redis-sessions==0.6.2
 django-session-timeout==0.1.0
+django-imagekit==4.1.0
+pilkit==2.0
+Pillow==9.2.0
 funcy==1.17
 hyperlink==21.0.0
 idna==3.3
