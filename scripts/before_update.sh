@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /
-rm -rf /django
+cd /root
+rm -rf /KGflex
