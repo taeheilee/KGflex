@@ -3,7 +3,7 @@ os: linux
 
 files: 
   - source: /
-    destination: /KGflex
+    destination: /root/KGflex
 
 permissions: 
   - object: scripts
@@ -13,7 +13,7 @@ permissions:
     mode: 755
     type: 
       - file
-  - object: /KGflex/scripts
+  - object: /root/KGflex/scripts
     pattern: "**"
     owner: root 
     group: root 
