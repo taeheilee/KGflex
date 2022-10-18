@@ -1,7 +1,8 @@
 #!/bin/bash
 
-cd /
-sudo cp -rf /KGflex /django
+killall python manage.py runserver 0:8000
+cd /root/KGflex
+\cp -rf config media static KGflex templates requirements.txt /django
 cd /django
 source myhome/bin/activate
 sudo sed -i "/twisted-iocpsupport==1.0.2/d" /django/requirements.txt
@@ -15,5 +16,4 @@ sudo sed -i "s/USE_CACHE = .*/USE_CACHE = False/" /django/config/settings.py
 sudo sed -i "s/IS_HOME = .*/IS_HOME = False/" /django/config/settings.py
 sudo sed -i "s/ REDIS_HOST = .*/ REDIS_HOST = \"{REDIS_HOST}\"/" /django/config/settings.py
 sudo systemctl restart django
-source myhome/bin/activate
 nohup python manage.py runserver 0:8000 &
