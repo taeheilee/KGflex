@@ -1,6 +1,6 @@
 #!/bin/bash
 
-killall python manage.py runserver 0:8000
+
 cd /root/KGflex
 \cp -rf config media static KGflex templates requirements.txt /django
 cd /django
@@ -16,4 +16,4 @@ sudo sed -i "s/USE_CACHE = .*/USE_CACHE = False/" /django/config/settings.py
 sudo sed -i "s/IS_HOME = .*/IS_HOME = False/" /django/config/settings.py
 sudo sed -i "s/ REDIS_HOST = .*/ REDIS_HOST = \"{REDIS_HOST}\"/" /django/config/settings.py
 sudo systemctl restart django
-nohup python manage.py runserver 0:8000&
+
