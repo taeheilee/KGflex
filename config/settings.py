@@ -15,6 +15,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
+DEPLOYMENT = "Deploy Success to Code Deploy + GithubAction"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'KGflex.apps.KgflexConfig',
+    'cacheops',
 ]
 
 MIDDLEWARE = [
@@ -71,16 +73,95 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+DataBase_Write_Endpoint = "mydb-instance-1.c7tpfyaiw1nc.ap-northeast-2.rds.amazonaws.com"
+DataBase_Read_Endpoint = "mydb-instance-1-ap-northeast-2a.c7tpfyaiw1nc.ap-northeast-2.rds.amazonaws.com"
 
+## Get User, Password from Secret Manager
+Secret = False
+if Secret:
+    import boto3.session
+    import json
+    from aws_secretsmanager_caching import SecretCache, SecretCacheConfig 
+
+    def get_secret():
+
+        secret_name = "Dev/kgcha/mysql_aurora"
+        region_name = "ap-northeast-2"
+
+        # Create a Secrets Manager client
+        session = boto3.session.Session()
+        client = session.client(
+            service_name='secretsmanager',
+            region_name=region_name
+        )
+        cache_config = SecretCacheConfig()
+        cache = SecretCache( config = cache_config, client = client)
+        secret_str = cache.get_secret_string(secret_name)
+        secret_data = json.loads(secret_str)
+        return secret_data
+    
+# In Pord Case, Use RDS Aurora and read replica
+if is_Production:
+    # Get Secret to AWS Secret Managerg
+    # SECRET = get_secret()
+    # SECRET['username']
+    # DataBase_User = SECRET['username']
+    # DataBase_User_Password = SECRET['password']
+    DataBase_User = "admin"
+    DataBase_User_Password = "admin123"
+    
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-}
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': "django_db",
+            'USER': DataBase_User,
+            'PASSWORD': DataBase_User_Password,
+            'HOST': DataBase_Write_Endpoint,
+            'PORT': '3306',
+            "OPTIONS": {"charset": "utf8mb4"}
+        },
+        'readonly': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': "django_db",
+            'USER': DataBase_User,
+            'PASSWORD': DataBase_User_Password,
+            'HOST': DataBase_Read_Endpoint,
+            'PORT': '3306',
+            "OPTIONS": {"charset": "utf8mb4"}
+        }
+    }
 
+    else:
+        DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+REDIS_HOST = "redis-001-001-001.vo2lks.0001.apn2.cache.amazonaws.com"
+
+USE_CACHE = False
+if USE_CACHE:
+    CACHEOPS_LRU = True
+    CACHEOPS_DEGRADE_ON_FAILURE = True
+    CACHEOPS_DEFAULTS = {
+        'timeout': 60*5,
+        'cache_on_save': True,
+        'ops' : 'all'
+    }
+    CACHEOPS_REDIS = {
+        'host' : REDIS_HOST,
+        'port' : 6379,
+        'db' : 1,
+        'socket_timeout': 1
+    }
+    CACHEOPS = {
+        'KGflex.*' : {},
+    }
+    
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
