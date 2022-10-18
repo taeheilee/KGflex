@@ -1,5 +1,4 @@
 #!/bin/bash
-cd /root/KGflex
 
 cd /KGflex
 source myhome/bin/activate
