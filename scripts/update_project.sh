@@ -1,8 +1,6 @@
 #!/bin/bash
 cd /root/KGflex
 
-\cp -rf config KGflex media templates requirements.txt /KGflex
-
 cd /KGflex
 source myhome/bin/activate
 sudo sed -i "/twisted-iocpsupport==1.0.2/d" /KGflex/requirements.txt
