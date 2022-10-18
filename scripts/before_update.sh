@@ -1,3 +1,3 @@
 #!/bin/bash
 cd /root
-rm -rf /KGflex
+rm -rf KGflex
