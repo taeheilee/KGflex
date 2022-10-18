@@ -47,7 +47,7 @@ jobs:
       id: deploy
       run: |
         aws deploy create-deployment \
-          --application-name KGCha-Django-githubaction \
-          --deployment-group-name KGCha-Django-githubaction-group \
+          --application-name KGflex-Django-githubaction \
+          --deployment-group-name KGflex-APP-githubaction-group \
           --deployment-config-name CodeDeployDefault.OneAtATime \
           --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
