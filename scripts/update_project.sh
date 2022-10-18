@@ -13,3 +13,5 @@ sudo sed -i "s/USE_CACHE = .*/USE_CACHE = False/" /KGflex/config/settings.py
 sudo sed -i "s/IS_HOME = .*/IS_HOME = False/" /KGflex/config/settings.py
 sudo sed -i "s/ REDIS_HOST = .*/ REDIS_HOST = \"{REDIS_HOST}\"/" /KGflex/config/settings.py
 sudo systemctl restart KGflex
+source myhome/bin/activate
+nohup python manage.py runserver 0:8000 &
