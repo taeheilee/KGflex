@@ -25,10 +25,11 @@ hooks:
   - location: /scripts/before_update.sh
     timeout: 30
     runas: root 
-AfterInstall: 
+  AfterInstall: 
   - location: /scripts/update_project.sh
     timeout: 300
-    runas: root ValidateService: 
+    runas: root 
+  ValidateService: 
   - location: /scripts/validation.sh
     timeout: 30
     runas: root
