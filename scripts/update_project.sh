@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /root/KGflex
 
-\cp -rf config KGflex common templates requirements.txt /KGflex
+\cp -rf config KGflex media templates requirements.txt /KGflex
 
 cd /KGflex
 source myhome/bin/activate
