@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /root 
-rm -rf django
+cd /
+rm -rf /django
