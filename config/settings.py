@@ -106,7 +106,7 @@ DataBase_User_Password = "admin123"
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-    DATABASES = {
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': "django_db",
