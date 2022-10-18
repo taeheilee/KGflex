@@ -100,15 +100,8 @@ if Secret:
         secret_data = json.loads(secret_str)
         return secret_data
     
-# In Pord Case, Use RDS Aurora and read replica
-if is_Production:
-    # Get Secret to AWS Secret Managerg
-    # SECRET = get_secret()
-    # SECRET['username']
-    # DataBase_User = SECRET['username']
-    # DataBase_User_Password = SECRET['password']
-    DataBase_User = "admin"
-    DataBase_User_Password = "admin123"
+DataBase_User = "admin"
+DataBase_User_Password = "admin123"
     
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -134,13 +127,7 @@ if is_Production:
         }
     }
 
-else:
-        DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+
 REDIS_HOST = "redis-001-001-001.vo2lks.0001.apn2.cache.amazonaws.com"
 
 USE_CACHE = False
