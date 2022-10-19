@@ -32,4 +32,4 @@ hooks:
   ValidateService: 
   - location: /scripts/validation.sh
     timeout: 30
-    runas : codedeployuser
+    runas : root
